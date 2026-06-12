@@ -9,20 +9,23 @@ export default function App() {
   const [step, setStep] = useState('category')
   const [category, setCategory] = useState(null)
   const [photo, setPhoto] = useState(null)
+  const [requirements, setRequirements] = useState(null)
 
   function handleCategorySelect(selected) {
     setCategory(selected)
     setStep('upload')
   }
 
-  function handlePhotoUpload(file) {
+  function handlePhotoUpload(file, reqs) {
     setPhoto(file)
+    setRequirements(reqs)
     setStep('result')
   }
 
   function handleRestart() {
     setCategory(null)
     setPhoto(null)
+    setRequirements(null)
     setStep('category')
   }
 
@@ -48,6 +51,7 @@ export default function App() {
           <ResultScreen
             category={category}
             photo={photo}
+            requirements={requirements}
             onRestart={handleRestart}
           />
         )}

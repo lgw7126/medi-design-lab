@@ -1,0 +1,130 @@
+.upload-screen {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* 촬영 / 갤러리 버튼 나란히 */
+.photo-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.photo-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 28px 12px;
+  background: var(--color-card);
+  border: 2px solid var(--color-accent-soft);
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-family: inherit;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.photo-btn:active {
+  border-color: var(--color-accent);
+  background: var(--color-accent-soft);
+}
+
+.photo-btn-icon {
+  font-size: 2.4rem;
+}
+
+.photo-btn-label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+/* 미리보기 */
+.preview-wrap {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.preview-image {
+  width: 100%;
+  max-height: 280px;
+  object-fit: cover;
+  border-radius: var(--radius);
+  display: block;
+}
+
+.change-photo-btn {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  padding: 8px 16px;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+}
+
+/* 요구사항 입력 */
+.requirements {
+  background: var(--color-card);
+  border-radius: var(--radius);
+  padding: 20px 18px;
+  margin-bottom: 4px;
+}
+
+.req-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.optional {
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: var(--color-sub);
+  margin-left: 6px;
+}
+
+.req-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.req-field:last-child {
+  margin-bottom: 0;
+}
+
+.req-field label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.req-field input {
+  padding: 14px 16px;
+  font-size: 1rem;
+  font-family: inherit;
+  border: 1.5px solid #e0ddd8;
+  border-radius: 12px;
+  background: var(--color-bg);
+  color: var(--color-text);
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.req-field input:focus {
+  border-color: var(--color-accent);
+}
+
+.req-field input::placeholder {
+  color: #b0aba3;
+}

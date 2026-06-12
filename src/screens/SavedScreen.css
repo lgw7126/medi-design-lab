@@ -1,0 +1,95 @@
+.saved-screen {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.saved-empty {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 60px 0;
+  text-align: center;
+  font-size: 1.1rem;
+  color: var(--color-sub);
+}
+
+.saved-empty-icon {
+  font-size: 3rem;
+}
+
+.saved-empty-sub {
+  font-size: 0.95rem;
+}
+
+.saved-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.saved-card {
+  background: var(--color-card);
+  border-radius: var(--radius);
+  padding: 20px 18px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+
+.saved-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+  gap: 8px;
+}
+
+.saved-category-badge {
+  display: inline-block;
+  font-size: 0.85rem;
+  color: var(--color-sub);
+  margin-bottom: 4px;
+}
+
+.saved-design-name {
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.saved-date {
+  font-size: 0.85rem;
+  color: var(--color-sub);
+  margin-top: 2px;
+}
+
+.remove-btn {
+  background: none;
+  border: none;
+  font-size: 1.3rem;
+  cursor: pointer;
+  padding: 4px;
+  flex-shrink: 0;
+  opacity: 0.6;
+  transition: opacity 0.15s;
+}
+
+.remove-btn:active {
+  opacity: 1;
+}
+
+.saved-concept {
+  font-size: 0.95rem;
+  color: var(--color-text);
+  line-height: 1.65;
+  margin-bottom: 14px;
+}
+
+.saved-detail {
+  margin-bottom: 12px;
+}
+
+.saved-detail:last-child {
+  margin-bottom: 0;
+}

@@ -1,0 +1,44 @@
+/* 모바일 우선, 큰 글씨, 단순한 디자인 */
+
+:root {
+  --color-bg: #faf8f5;
+  --color-card: #ffffff;
+  --color-text: #2b2b2b;
+  --color-sub: #6b6b6b;
+  --color-accent: #4a7c6f;
+  --color-accent-soft: #e4efec;
+  --radius: 20px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  /* 기본 글자 크기를 키워 시니어도 읽기 편하게 */
+  font-size: 18px;
+}
+
+body {
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  background: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.6;
+}
+
+#root {
+  max-width: 480px;
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 넓은 화면(태블릿/PC)에서는 가운데 카드 형태로 */
+@media (min-width: 600px) {
+  #root {
+    padding: 24px 0;
+  }
+}

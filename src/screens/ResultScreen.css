@@ -1,0 +1,163 @@
+.result-screen {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* 로딩 */
+.loading-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 48px 0;
+  text-align: center;
+}
+
+.loading-spinner {
+  width: 52px;
+  height: 52px;
+  border: 5px solid var(--color-accent-soft);
+  border-top-color: var(--color-accent);
+  border-radius: 50%;
+  animation: spin 0.9s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.loading-text {
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.loading-sub {
+  font-size: 0.95rem;
+  color: var(--color-sub);
+}
+
+/* 에러 */
+.error-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 32px 0;
+}
+
+.error-icon {
+  font-size: 3rem;
+  margin-bottom: 12px;
+}
+
+.error-message {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #c0392b;
+  margin-bottom: 12px;
+}
+
+.error-hint {
+  font-size: 0.95rem;
+  color: var(--color-sub);
+  line-height: 1.7;
+}
+
+.error-hint code {
+  background: #f0ede8;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+/* 시안 카드 목록 */
+.design-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.design-card {
+  background: var(--color-card);
+  border-radius: var(--radius);
+  padding: 22px 20px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+.design-card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.design-badge {
+  background: var(--color-accent);
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 20px;
+  flex-shrink: 0;
+}
+
+.design-name {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.design-concept {
+  font-size: 1rem;
+  color: var(--color-text);
+  line-height: 1.65;
+  margin-bottom: 16px;
+}
+
+.design-section {
+  margin-bottom: 14px;
+}
+
+.design-section:last-child {
+  margin-bottom: 0;
+}
+
+.design-label {
+  display: inline-block;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-accent);
+  background: var(--color-accent-soft);
+  padding: 2px 10px;
+  border-radius: 20px;
+  margin-bottom: 8px;
+}
+
+.design-materials {
+  font-size: 1rem;
+  color: var(--color-text);
+}
+
+.design-features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.design-features li {
+  font-size: 1rem;
+  padding-left: 1.1em;
+  position: relative;
+}
+
+.design-features li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--color-accent);
+  font-weight: 700;
+}

@@ -3,11 +3,9 @@
 사진을 업로드하면 AI가 맞춤형 의료 액세서리 디자인 시안을 생성해주는 웹앱.
 보청기 케이스, 인솔, 손목·무릎 보호대를 심미성과 착용감 모두 고려해 제안합니다.
 
-<br>
 
-[![앱 바로 열기](https://img.shields.io/badge/앱%20바로%20열기-4a7c6f?style=for-the-badge&logo=googlechrome&logoColor=white)](https://lgw7126.github.io/medi-design-lab/)
+### 🚀 [앱 바로 열기 → lgw7126.github.io/medi-design-lab](https://lgw7126.github.io/medi-design-lab/)
 
-<br>
 
 ---
 

@@ -11,6 +11,7 @@ export default function App() {
   const [category, setCategory] = useState(null)
   const [photo, setPhoto] = useState(null)
   const [requirements, setRequirements] = useState(null)
+  const [wearerInfo, setWearerInfo] = useState(null)
   const { saved, saveDesign, removeDesign, isSaved } = useSavedDesigns()
 
   function handleCategorySelect(selected) {
@@ -18,9 +19,10 @@ export default function App() {
     setStep('upload')
   }
 
-  function handlePhotoUpload(file, reqs) {
+  function handlePhotoUpload(file, reqs, wearer) {
     setPhoto(file)
     setRequirements(reqs)
+    setWearerInfo(wearer)
     setStep('result')
   }
 
@@ -28,6 +30,7 @@ export default function App() {
     setCategory(null)
     setPhoto(null)
     setRequirements(null)
+    setWearerInfo(null)
     setStep('category')
   }
 
@@ -66,6 +69,7 @@ export default function App() {
             category={category}
             photo={photo}
             requirements={requirements}
+            wearerInfo={wearerInfo}
             onRestart={handleRestart}
             onGoSaved={() => setStep('saved')}
             saveDesign={saveDesign}

@@ -1,18 +1,35 @@
 import { useEffect, useState } from 'react'
-import { generateDesigns } from '../services/designApi.js'
+import { validatePhoto, generateDesigns } from '../services/designApi.js'
 import './ResultScreen.css'
 
-export default function ResultScreen({ category, photo, requirements, onRestart, onGoSaved, saveDesign, isSaved }) {
+export default function ResultScreen({ category, photo, requirements, wearerInfo, onRestart, onGoSaved, saveDesign, isSaved }) {
+  const [stage, setStage] = useState('validating') // validating | generating | done | error | invalid
   const [designs, setDesigns] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
+  const [errorMsg, setErrorMsg] = useState('')
+  const [invalidReason, setInvalidReason] = useState('')
   const [justSaved, setJustSaved] = useState(null)
 
   useEffect(() => {
-    generateDesigns(photo, requirements, category)
-      .then(setDesigns)
-      .catch((err) => setError(err.message ?? '알 수 없는 오류가 발생했어요.'))
-      .finally(() => setLoading(false))
+    async function run() {
+      try {
+        // 1단계: 사진 유효성 검사
+        const check = await validatePhoto(photo, category)
+        if (!check.valid) {
+          setInvalidReason(check.reason)
+          setStage('invalid')
+          return
+        }
+        // 2단계: 디자인 시안 생성
+        setStage('generating')
+        const result = await generateDesigns(photo, requirements, wearerInfo, category)
+        setDesigns(result)
+        setStage('done')
+      } catch (err) {
+        setErrorMsg(err.message ?? '알 수 없는 오류가 발생했어요.')
+        setStage('error')
+      }
+    }
+    run()
   }, [])
 
   function handleSave(design) {
@@ -25,20 +42,18 @@ export default function ResultScreen({ category, photo, requirements, onRestart,
     <div className="result-screen">
       <div className="result-header">
         <h2 className="screen-title">{category.icon} 맞춤 디자인 시안</h2>
-        <button className="saved-nav-btn" onClick={onGoSaved}>
-          저장함 🗂️
-        </button>
+        <button className="saved-nav-btn" onClick={onGoSaved}>저장함 🗂️</button>
       </div>
       <p className="screen-subtitle">{category.name}</p>
 
-      {loading && <LoadingState />}
-      {error && <ErrorState message={error} onRestart={onRestart} />}
+      {stage === 'validating' && <LoadingState message="사진을 확인하고 있어요..." sub="업로드한 사진이 맞는지 검토 중" />}
+      {stage === 'generating' && <LoadingState message="AI가 맞춤 디자인을 만들고 있어요" sub="잠시만 기다려 주세요 (10~20초)" />}
+      {stage === 'invalid' && <InvalidState reason={invalidReason} category={category} onBack={onRestart} />}
+      {stage === 'error' && <ErrorState message={errorMsg} onRestart={onRestart} />}
 
-      {!loading && !error && designs.length > 0 && (
+      {stage === 'done' && (
         <>
-          {justSaved && (
-            <div className="save-toast">❤️ "{justSaved}" 저장됨</div>
-          )}
+          {justSaved && <div className="save-toast">❤️ "{justSaved}" 저장됨</div>}
           <div className="design-list">
             {designs.map((design, i) => (
               <DesignCard
@@ -51,9 +66,7 @@ export default function ResultScreen({ category, photo, requirements, onRestart,
             ))}
           </div>
           <div className="button-group" style={{ marginTop: 16 }}>
-            <button className="big-button secondary" onClick={onRestart}>
-              처음으로 돌아가기
-            </button>
+            <button className="big-button secondary" onClick={onRestart}>처음으로 돌아가기</button>
           </div>
         </>
       )}
@@ -61,12 +74,29 @@ export default function ResultScreen({ category, photo, requirements, onRestart,
   )
 }
 
-function LoadingState() {
+function LoadingState({ message, sub }) {
   return (
     <div className="loading-wrap">
       <div className="loading-spinner" />
-      <p className="loading-text">AI가 맞춤 디자인을 만들고 있어요</p>
-      <p className="loading-sub">잠시만 기다려 주세요 (10~20초)</p>
+      <p className="loading-text">{message}</p>
+      <p className="loading-sub">{sub}</p>
+    </div>
+  )
+}
+
+function InvalidState({ reason, category, onBack }) {
+  return (
+    <div className="invalid-wrap">
+      <p className="invalid-icon">🚫</p>
+      <h3 className="invalid-title">올바른 사진이 아니에요</h3>
+      <p className="invalid-reason">{reason}</p>
+      <div className="invalid-guide">
+        <p className="invalid-guide-label">📌 올바른 사진 예시</p>
+        <p>{category.photoGuide}</p>
+      </div>
+      <button className="big-button" style={{ marginTop: 24 }} onClick={onBack}>
+        사진 다시 올리기
+      </button>
     </div>
   )
 }
@@ -76,9 +106,6 @@ function ErrorState({ message, onRestart }) {
     <div className="error-wrap">
       <p className="error-icon">⚠️</p>
       <p className="error-message">{message}</p>
-      <p className="error-hint">
-        API 키가 올바르게 설정되어 있는지 확인해 주세요.
-      </p>
       <button className="big-button secondary" style={{ marginTop: 24 }} onClick={onRestart}>
         처음으로 돌아가기
       </button>
@@ -95,12 +122,8 @@ function DesignCard({ design, index, saved, onSave }) {
           <span className="design-badge">{labels[index] ?? `${index + 1}안`}</span>
           <h3 className="design-name">{design.name}</h3>
         </div>
-        <button
-          className={`heart-btn ${saved ? 'heart-btn--saved' : ''}`}
-          onClick={onSave}
-          disabled={saved}
-          aria-label={saved ? '저장됨' : '저장하기'}
-        >
+        <button className={`heart-btn ${saved ? 'heart-btn--saved' : ''}`}
+          onClick={onSave} disabled={saved} aria-label={saved ? '저장됨' : '저장하기'}>
           {saved ? '❤️' : '🤍'}
         </button>
       </div>

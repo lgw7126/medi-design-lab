@@ -4,6 +4,79 @@
   flex: 1;
 }
 
+/* 착용자 정보 / 스타일 섹션 */
+.info-section {
+  background: var(--color-card);
+  border-radius: var(--radius);
+  padding: 20px 18px;
+  margin-bottom: 14px;
+}
+
+.info-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.allergy-note {
+  font-size: 0.82rem;
+  font-weight: 400;
+  color: var(--color-sub);
+  margin-left: 4px;
+}
+
+/* 칩 선택 */
+.chip-field {
+  margin-bottom: 16px;
+}
+
+.chip-field:last-child {
+  margin-bottom: 0;
+}
+
+.chip-field > label {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip {
+  padding: 7px 16px;
+  border-radius: 30px;
+  border: 1.5px solid #e0ddd8;
+  background: var(--color-bg);
+  font-family: inherit;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.15s;
+  color: var(--color-text);
+}
+
+.chip--active {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #fff;
+  font-weight: 600;
+}
+
+.chip--allergy {
+  border-color: #e0ddd8;
+}
+
+.chip--allergy-active {
+  background: #fde8e8;
+  border-color: #e57373;
+  color: #c62828;
+  font-weight: 600;
+}
+
 /* 촬영 / 갤러리 버튼 나란히 */
 .photo-buttons {
   display: grid;
